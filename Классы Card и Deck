@@ -1,0 +1,29 @@
+from random import shuffle as sh
+class Card:
+    def __init__(self, suit =("♣", "♢", "♡", "♠"), ranks = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A")):
+        self.suit =suit
+        self.ranks = ranks
+
+
+    def __str__(self):
+        return f"{self.suit}{self.ranks}"
+
+class Deck:
+    def __init__(self):
+        self.full_card = Card()
+        self.total_card = [Card(suit, rank) for suit in self.full_card.suit for rank in self.full_card.ranks]
+
+
+    def shuffle(self):
+        if len(self.total_card) < 52:
+            raise ValueError('Перемешивать можно только полную колоду')
+        sh(self.total_card)
+
+    def deal(self):
+        if len(self.total_card) > 0:
+            return self.total_card.pop()
+        else:
+            raise ValueError('Все карты разыграны')
+
+    def __str__(self):
+        return f"Карт в колоде: {len(self.total_card)}"
